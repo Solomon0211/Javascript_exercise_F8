@@ -1,5 +1,5 @@
-1.Hạn chế tối đa các bài hát bị lặp lại
- currentIndex: 0,
+# 1.Hạn chế tối đa các bài hát bị lặp lại
+```python currentIndex: 0,
         isPlaying: false,
         isRandom: false,
         isRepeat: false,
@@ -12,6 +12,7 @@ thêm mảng playedIndexes[]
           this.playedIndexes.push(this.config.currentIndex)
           //Object.assign(this, this.config)
         },
+```
 Load bài hát hiện tại push vào mảng playedIndexes
 playRandomSong: function () {
           let newIndex
@@ -30,13 +31,13 @@ Sửa lại hàm playRandomSong
 
 Mỗi bài sẽ chỉ được random 1 lần!
 
-2. Fix lỗi khi tua bài hát, click giữ một chút sẽ thấy lỗi, vì event updatetime nó liên tục chạy dẫn tới lỗi
+# 2. Fix lỗi khi tua bài hát, click giữ một chút sẽ thấy lỗi, vì event updatetime nó liên tục chạy dẫn tới lỗi
 Thay sự kiện onchange thành oninput:
 progress.oninput = function(e) {
             const seekTime = audio.duration / 100 * e.target.value
             audio.currentTime = seekTime
           };
-3. Fix lỗi khi next tới 1-3 bài đầu danh sách thì không “scroll into view”
+# 3. Fix lỗi khi next tới 1-3 bài đầu danh sách thì không “scroll into view”
 
 Thay block: 'nearest' thành block: 'center'
 scrollToActiveSong: function () {
@@ -48,7 +49,7 @@ scrollToActiveSong: function () {
           }, 300)
         },
 
-4. Lưu lại vị trí bài hát đang nghe, F5 lại ứng dụng không bị quay trở về bài đầu tiên
+# 4. Lưu lại vị trí bài hát đang nghe, F5 lại ứng dụng không bị quay trở về bài đầu tiên
 thêm dòng this.currentIndex = this.config.currentIndex vào hàm loadConfig
 loadConfig: function () {
           this.isRandom = this.config.isRandom
@@ -61,7 +62,7 @@ loadConfig: function () {
 this.setConfig("currentIndex", this.currentIndex)
 thêm dòng này vào hàm loadCurrentSong
 
-5. Thêm chức năng điều chỉnh âm lượng, lưu vị trí âm lượng người dùng đã chọn. Mặc định 100%
+# 5. Thêm chức năng điều chỉnh âm lượng, lưu vị trí âm lượng người dùng đã chọn. Mặc định 100%
 
 <!--Adjust Volume -->
       <div class="container">

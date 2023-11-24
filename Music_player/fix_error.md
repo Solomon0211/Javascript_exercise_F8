@@ -13,7 +13,10 @@ thêm mảng playedIndexes[]
           //Object.assign(this, this.config)
         },
 ```
-Load bài hát hiện tại push vào mảng playedIndexes
+
+> Load bài hát hiện tại push vào mảng playedIndexes
+
+```
 playRandomSong: function () {
           let newIndex
           
@@ -27,19 +30,24 @@ playRandomSong: function () {
           this.currentIndex = newIndex
           this.loadCurrentSong()
         },
-Sửa lại hàm playRandomSong
+```
+> Sửa lại hàm playRandomSong
 
-Mỗi bài sẽ chỉ được random 1 lần!
+> Mỗi bài sẽ chỉ được random 1 lần!
 
 # 2. Fix lỗi khi tua bài hát, click giữ một chút sẽ thấy lỗi, vì event updatetime nó liên tục chạy dẫn tới lỗi
-Thay sự kiện onchange thành oninput:
+>[!TIP]
+>Thay sự kiện onchange thành oninput:
+```
 progress.oninput = function(e) {
             const seekTime = audio.duration / 100 * e.target.value
             audio.currentTime = seekTime
           };
+```
 # 3. Fix lỗi khi next tới 1-3 bài đầu danh sách thì không “scroll into view”
-
-Thay block: 'nearest' thành block: 'center'
+>[!TIP]
+> Thay block: 'nearest' thành block: 'center'
+```
 scrollToActiveSong: function () {
           setTimeout(() => {
             $('.song.active').scrollIntoView({
@@ -48,9 +56,10 @@ scrollToActiveSong: function () {
             })
           }, 300)
         },
-
+```
 # 4. Lưu lại vị trí bài hát đang nghe, F5 lại ứng dụng không bị quay trở về bài đầu tiên
-thêm dòng this.currentIndex = this.config.currentIndex vào hàm loadConfig
+>[!TIP]
+> thêm dòng this.currentIndex = this.config.currentIndex vào hàm loadConfig
 loadConfig: function () {
           this.isRandom = this.config.isRandom
           this.isRepeat = this.config.isRepeat
@@ -81,7 +90,8 @@ thêm dòng này vào hàm loadCurrentSong
 
       <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0">
       <!-- <span class="volume-value">50%</span> -->
-Thêm các icon
+> [!IMPORTANT]  Thêm các icon
+```
 const app = {
         currentIndex: 0,
         isPlaying: false,
@@ -89,8 +99,10 @@ const app = {
         isRepeat: false,
         playedIndexes: [],
         currentVolume: 0,
+```
 Thêm biến currentVolume để lưu âm lượng hiện tại
-// Xử lý tăng giảm âm lượng
+### // Xử lý tăng giảm âm lượng
+```
           upVolumeBtn.onclick = function () {
             console.log(audio.volume)
             if (audio.volume < 1.0) {
@@ -116,8 +128,9 @@ Thêm biến currentVolume để lưu âm lượng hiện tại
           audio.onvolumechange = function () {
             volumeSlider.value = audio.volume;
           }
-
+```
 thêm 2 dong ở hàm loadConfig
+```
 loadConfig: function () {
           this.isRandom = this.config.isRandom
           this.isRepeat = this.config.isRepeat
@@ -127,3 +140,4 @@ loadConfig: function () {
           audio.volume = this.config.currentVolume
           //Object.assign(this, this.config)
         },
+```
